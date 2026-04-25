@@ -58,6 +58,30 @@ async function testConnection() {
 
 testConnection();
 
+// API Info endpoint
+app.get('/api/info', (req, res) => {
+    res.json({
+        name: 'Task Management API',
+        version: '1.0.0',
+        description: 'A REST API for managing tasks with user authentication',
+        author: 'Your Name',
+        uptime: `${Math.floor(process.uptime())} seconds`,
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString(),
+        endpoints: {
+            health: 'GET /health',
+            info: 'GET /api/info',
+            register: 'POST /api/register',
+            login: 'POST /api/login',
+            getTasks: 'GET /api/tasks',
+            getTask: 'GET /api/tasks/:id',
+            createTask: 'POST /api/tasks',
+            updateTask: 'PUT /api/tasks/:id',
+            deleteTask: 'DELETE /api/tasks/:id'
+        }
+    });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({ 
